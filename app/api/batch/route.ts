@@ -138,7 +138,7 @@ const fetchYouTubeChannels = async (apiKey: string): Promise<YouTubeChannel[]> =
 };
 
 export async function GET() {
-  const url = new URL("/api/youtube/channel");
+  const url = new URL("/api/batch");
   let minSubscribers = 0;
   let maxSubscribers = MAX_ALLOWED_SUBSCRIBERS;
 
