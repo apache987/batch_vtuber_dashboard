@@ -1,5 +1,5 @@
 // src/app/api/youtube/channel/route.ts
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import { createClient, SupabaseClient } from "@supabase/supabase-js";
 
 type YouTubeChannel = {
@@ -137,14 +137,14 @@ const fetchYouTubeChannels = async (apiKey: string): Promise<YouTubeChannel[]> =
   return collected.slice(0, MAX_RESULTS);
 };
 
-export async function GET() {
-  const url = new URL("/api/batch");
+export async function GET(request: NextRequest) {
+  const searchParams = request.nextUrl.searchParams;
   let minSubscribers = 0;
   let maxSubscribers = MAX_ALLOWED_SUBSCRIBERS;
 
   try {
-    minSubscribers = parseBound(url.searchParams.get("minSubscribers"), 0);
-    maxSubscribers = parseBound(url.searchParams.get("maxSubscribers"), MAX_ALLOWED_SUBSCRIBERS);
+    minSubscribers = parseBound(searchParams.get("minSubscribers"), 0);
+    maxSubscribers = parseBound(searchParams.get("maxSubscribers"), MAX_ALLOWED_SUBSCRIBERS);
   } catch (error) {
     const message = error instanceof Error ? error.message : "Invalid query parameter";
     return NextResponse.json({ error: message }, { status: 400 });
