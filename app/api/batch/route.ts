@@ -15,10 +15,10 @@ type YouTubeChannel = {
 };
 
 const KEYWORD = "Vtuber";
-const MAX_RESULTS = 100;
+const MAX_RESULTS = 5000;
 const SEARCH_ENDPOINT = "https://www.googleapis.com/youtube/v3/search";
 const CHANNELS_ENDPOINT = "https://www.googleapis.com/youtube/v3/channels";
-const CHUNK_SIZE = 50; // YouTube Data API limit per request
+const CHUNK_SIZE = 100; // YouTube Data API limit per request
 const COUNTRY_CODE = "JP";
 const MAX_ALLOWED_SUBSCRIBERS = 10_000;
 
